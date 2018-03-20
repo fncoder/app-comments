@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "version": "",
+  "name": "react-comments",
+  "version": "1.0.0",
   "main": "webpack.config.js",
   "scripts": {
     "watch": "webpack-dev-server --watch",
