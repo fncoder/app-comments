@@ -15,12 +15,24 @@ module.exports = {
     contentBase: 'dist',
     port: 3000
   },
+  mode: 'development',
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
+        use: [
+          {
+            loader: 'babel-loader'
+          },
+          {
+            loader: 'eslint-loader',
+            options: {
+              emitWarning: true,
+              fix: true
+            }
+          }
+        ]
       },
       {
         test: /\.css$/,
@@ -60,7 +72,8 @@ module.exports = {
     new WriteFilePlugin,
     new HtmlWebpackPlugin({
       inject: false,
-      template: './src/index.html'
+      template: './src/index.html',
+      filename: './index.html'
     })
   ]
 };
