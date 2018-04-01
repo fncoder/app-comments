@@ -5,9 +5,10 @@ padding: 30px;
 color: #878787;
 font-size: 15px;
 position: absolute;
-top:50%;
-transform: translateY(-50%);
-animation: animate-msg 1s ease;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+animation: animate-msg 1.2s ease;
 opacity:1;
 }
 
@@ -19,14 +20,12 @@ opacity: 0;
 
 @keyframes animate-msg{
   0%{
-  top:0;
-  transform: translateY(0);
+  transform: translate(-50%, -550%);
   opacity:0;
   }
 
   100%{
-  top:50%;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
   opacity:1;
   }
 }

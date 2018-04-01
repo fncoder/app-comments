@@ -26,56 +26,6 @@ class FormRegister extends React.Component {
     this.onChangeFetch = this.onChangeFetch.bind(this);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    const url = 'http://localhost:3001/register';
-    fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        name: this.state.name,
-        password: this.state.password,
-        repeatPassword: this.state.repeatPassword,
-        registerStatus: true,
-      }),
-    }).then(res => res.json()).then((res) => {
-      if (res.status === 'register') {
-        this.setState({
-          users: [...this.state.users, res],
-          status: true,
-          keyword: false,
-        });
-      } else {
-        this.setState({
-          logs: [...this.state.logs, res],
-          status: false,
-          keyword: true,
-        });
-      }
-    });
-  }
-
-  onChangeFetch() {
-    const url = 'http://localhost:3001/register';
-    fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        name: this.state.name,
-        password: this.state.password,
-        repeatPassword: this.state.repeatPassword,
-      }),
-    }).then(res => res.json()).then((res) => {
-      this.setState({
-        logs: [...this.state.logs, res],
-      });
-    });
-  }
-
   onChangeName(e) {
     this.setState({
       name: e.target.value,
@@ -106,29 +56,79 @@ class FormRegister extends React.Component {
     });
   }
 
-  render() {
-    console.log(this.state.users);
-    if (this.state.status) {
-      setTimeout(() => {
-        this.setState({
-          status: false,
-        });
-      }, 3500);
-    }
+  onChangeFetch() {
+    const url = 'http://localhost:3001/register';
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        name: this.state.name,
+        password: this.state.password,
+        repeatPassword: this.state.repeatPassword,
+      }),
+    }).then(res => res.json()).then((res) => {
+      this.setState({
+        logs: [...this.state.logs, res],
+      });
+    });
+  }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    const url = 'http://localhost:3001/register';
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        name: this.state.name,
+        password: this.state.password,
+        repeatPassword: this.state.repeatPassword,
+        registerStatus: true,
+      }),
+    }).then(res => res.json()).then((res) => {
+      if (res.status === 'register') {
+        this.setState({
+          users: [...this.state.users, res],
+          status: true,
+          keyword: false,
+        }, () => {
+          if (this.state.status) {
+            setTimeout(() => {
+              this.setState({
+                status: false,
+              });
+            }, 3500);
+          }
+          this.props.users(this.state.users);
+        });
+      } else {
+        this.setState({
+          logs: [...this.state.logs, res],
+          status: false,
+          keyword: true,
+        });
+      }
+    });
+  }
+
+  render() {
     return (
       <React.Fragment>
-        <section className="form-register">
+        <section className="form">
           <div className="wrapper-form">
-            <form className="form" onSubmit={this.handleSubmit}>
-          Sign Up
+            <form className="form-submit" onSubmit={this.handleSubmit}>
+              <p className="form-text">Sign Up</p>
               <FormInputs
                 logs={this.state.logs}
                 onChangeName={this.onChangeName}
                 onChangePassword={this.onChangePassword}
                 onChangeRepeat={this.onChangeRepeat}
               />
-              <FormButtons ontest={this.onTest} />
+              <FormButtons handleLogin={this.props.handleLogin} />
             </form>
           </div>
         </section>

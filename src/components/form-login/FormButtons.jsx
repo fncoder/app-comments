@@ -2,7 +2,7 @@ import React from 'react';
 
 const FormButtons = () => (
   <div className="form-buttons">
-    <button type="button" className="btn btn--login">Next</button>
+    <button type="submit" className="btn btn--next"><span className="btn-name">Next</span></button>
   </div>
 );
 

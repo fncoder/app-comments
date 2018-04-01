@@ -1,16 +1,21 @@
-.form-register{
+.form{
 margin: 0 auto;
 max-width: 350px;
 width:100%;
 background: #ffffff;
 border-top: 5px solid #F1F1F1;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+animation: animate-register 1.2s ease;
 }
 
 .wrapper-form{
 padding: 30px;
 }
 
-.form{
+.form-submit{
 display: flex;
 flex-direction: column;
 font-family: 'Raleway', sans-serif;
@@ -25,7 +30,7 @@ font-family: 'Raleway', sans-serif;
 width:100%;
 padding:0 12px;
 height: 40px;
-font-size: 16px;
+font-size: 15px;
 font-weight: 300;
 color: #878787;
 border:none;
@@ -47,24 +52,36 @@ transition: all 0.25s ease;
 
 .label{
 font-weight: 300;
-font-size: 16px;
+font-size: 15px;
 position: relative;
 
-  &:first-child{
+  &:nth-child(2){
   margin-top: 35px;
   }
 
-  &:nth-child(1n+2){
-  margin-top: 25px;
+  &:nth-child(3){
+  margin-top: 20px;
   }
 
-  &:nth-child(3){
-  margin-top: 10px;
+  &:nth-child(4){
+  margin-top: 5px;
   }
 }
 
 .form-buttons{
 display: flex;
 flex-direction: column;
-margin-top: 25px;
+margin-top: 20px;
+}
+
+@keyframes animate-register{
+  0%{
+  transform: translate(-50%, -170%);
+  opacity:0;
+  }
+
+  100%{
+  transform: translate(-50%, -50%);
+  opacity:1;
+  }
 }

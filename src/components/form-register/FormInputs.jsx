@@ -6,6 +6,7 @@ const FormInputs = (props) => {
   if (props.logs) {
     validate = props.logs[props.logs.length - 1];
   }
+
   return (
     <React.Fragment>
       <label htmlFor="nickname" className="label-text label">
