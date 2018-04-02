@@ -11,46 +11,56 @@ import FormLoginInputs from './components/form-login/FormInputs.jsx';
 import Comment from './components/comment/Comment.jsx';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
+      register: true,
       login: false,
-      users: [],
+      next: false,
+      user: undefined,
     };
 
-    this.handleRegister = this.handleLogin.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
-    this.getUsers = this.getUsers.bind(this);
+    this.handleComment = this.handleComment.bind(this);
   }
 
   handleLogin() {
-    this.setState(prevState => ({
-      login: !prevState.login,
-    }));
+    this.setState({
+      register: false,
+      login: true,
+    });
   }
 
   handleRegister(e) {
     e.preventDefault();
-    this.setState(prevState => ({
-      login: !prevState.login,
-    }));
+    this.setState({
+      register: true,
+      login: false,
+    });
   }
 
-  getUsers(value) {
+  handleComment(value) {
     this.setState({
-      users: [...this.state.users, value[value.length - 1]],
+      user: value,
+      login: false,
+      next: true,
     });
-    { this.state.login ?
-      <FormLogin users={this.state.users} handleRegister={this.handleRegister} /> :
-      <FormRegister users={this.getUsers} handleLogin={this.handleLogin} />; }
   }
 
   render() {
+    // console.log(this.state.user);
     return (
       <React.Fragment>
-
-        <Comment />
+        {this.state.register ? <FormRegister
+          handleLogin={this.handleLogin}
+        /> : null}
+        {this.state.login ? <FormLogin
+          handleRegister={this.handleRegister}
+          handleComment={this.handleComment}
+        /> : null}
+        {this.state.next ? <Comment /> : null}
       </React.Fragment>
     );
   }

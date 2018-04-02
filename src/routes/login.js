@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const users = require('./register.js').users;
+
 
 router.post('/', (req, res) =>{
   const name = req.body.name;
   const password = req.body.password;
-  const registers = req.body.users;
-
   const loginStatus = req.body.loginStatus;
 
   if(name.length <= 0 && password.length <= 0){
@@ -32,8 +32,8 @@ router.post('/', (req, res) =>{
   else{
     if(loginStatus){
       let checkCorrect = true;
-        for(let i=0; i < registers.length; i++){
-          if(registers[i].name === name && registers[i].password === password){
+        for(let i=0; i < users.length; i++){
+          if(users[i].name === name && users[i].password === password){
             res.json({
               name: name,
               password: password,
@@ -63,7 +63,7 @@ router.post('/', (req, res) =>{
     }
 
   }
-  console.log(req.body);
+  console.log(users);
 })
 
 module.exports = router;

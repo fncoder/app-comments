@@ -12,7 +12,6 @@ class FormRegister extends React.Component {
       password: '',
       repeatPassword: '',
       message: undefined,
-      users: [],
       logs: [],
       status: false,
       keyword: false,
@@ -92,7 +91,6 @@ class FormRegister extends React.Component {
     }).then(res => res.json()).then((res) => {
       if (res.status === 'register') {
         this.setState({
-          users: [...this.state.users, res],
           status: true,
           keyword: false,
         }, () => {
@@ -103,7 +101,6 @@ class FormRegister extends React.Component {
               });
             }, 3500);
           }
-          this.props.users(this.state.users);
         });
       } else {
         this.setState({

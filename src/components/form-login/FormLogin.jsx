@@ -37,6 +37,8 @@ class FormLogin extends React.Component {
         this.setState({
           login: res,
           keyword: false,
+        }, () => {
+          this.props.handleComment(this.state.login);
         });
       } else {
         this.setState({
@@ -86,7 +88,6 @@ class FormLogin extends React.Component {
   }
 
   render() {
-    console.log(this.state.login);
     return (
       <section className="form">
         <div className="wrapper-form">

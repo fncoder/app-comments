@@ -1,13 +1,14 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const register = require('./routes/register.js')
-const login = require('./routes/login.js')
 const app = express();
+const bodyParser = require('body-parser');
+const register = require('./routes/register.js');
+const login = require('./routes/login.js')
+
 const staticFiles = __dirname + './../dist';
 
 app.use(express.static(staticFiles));
 app.use(bodyParser());
-app.use('/register', register);
+app.use('/register', register.router);
 app.use('/login', login);
 
 
