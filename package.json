@@ -5,6 +5,7 @@
   "scripts": {
     "watch": "webpack-dev-server --watch",
     "server": "node ./src/server.js"
+    
   },
   "author": "Krystian Witkowski",
   "license": "MIT",

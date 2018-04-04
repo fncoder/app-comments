@@ -3,12 +3,9 @@ import ReactDOM from 'react-dom';
 import GlobalStyle from './scss/global.scss';
 import RenderHTML from './index.html';
 import FormRegister from './components/form-register/FormRegister.jsx';
-import FormRegisterButtons from './components/form-register/FormButtons.jsx';
-import FormRegisterInputs from './components/form-register/FormInputs.jsx';
 import FormLogin from './components/form-login/FormLogin.jsx';
-import FormLoginButtons from './components/form-login/FormButtons.jsx';
-import FormLoginInputs from './components/form-login/FormInputs.jsx';
 import Comment from './components/comment/Comment.jsx';
+import Posts from './components/posts/Posts.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,11 +16,13 @@ class App extends React.Component {
       login: false,
       next: false,
       user: undefined,
+      posts: [],
     };
 
     this.handleRegister = this.handleRegister.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleComment = this.handleComment.bind(this);
+    this.handlePost = this.handlePost.bind(this);
   }
 
   handleLogin() {
@@ -49,18 +48,40 @@ class App extends React.Component {
     });
   }
 
+  handlePost(value) {
+    this.setState({
+      posts: [...this.state.posts, value],
+    });
+  }
+
+  componentDidMount() {
+    const url = 'http://localhost:3001/getpost';
+    fetch(url)
+      .then(res => res.json()).then((res) => {
+        if (res.length > 0) {
+          res.forEach((value, index) => {
+            this.handlePost(value);
+          });
+        }
+      });
+  }
   render() {
-    // console.log(this.state.user);
     return (
       <React.Fragment>
-        {this.state.register ? <FormRegister
-          handleLogin={this.handleLogin}
-        /> : null}
+        {this.state.register ? <FormRegister handleLogin={this.handleLogin} /> : null}
         {this.state.login ? <FormLogin
           handleRegister={this.handleRegister}
           handleComment={this.handleComment}
         /> : null}
-        {this.state.next ? <Comment /> : null}
+        {this.state.next ?
+          <div className="section">
+            <Posts posts={this.state.posts} />
+            <Comment
+              handlePost={this.handlePost}
+              user={this.state.user}
+            />
+          </div>
+           : null}
       </React.Fragment>
     );
   }

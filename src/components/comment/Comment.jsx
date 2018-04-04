@@ -1,21 +1,85 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import CommentButton from './CommentButton.jsx';
 
 class Comment extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      textarea: '',
+      log: '',
+      keyword: false,
+    };
+
+    this.fetchMessage = this.fetchMessage.bind(this);
+    this.onChangeMessage = this.onChangeMessage.bind(this);
+    this.onChangeFetch = this.onChangeFetch.bind(this);
   }
+
+  onChangeMessage(e) {
+    this.setState({
+      textarea: e.target.value,
+    }, () => {
+      if (this.state.keyword) {
+        this.onChangeFetch();
+      }
+    });
+  }
+
+  onChangeFetch() {
+    const url = 'http://localhost:3001/post';
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        name: this.props.user.name,
+        textarea: this.state.textarea,
+      }),
+    }).then(res => res.json()).then((res) => {
+      this.setState({
+        log: res.message,
+      });
+    });
+  }
+
+  fetchMessage(e) {
+    e.preventDefault();
+    const url = 'http://localhost:3001/post';
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        name: this.props.user.name,
+        textarea: this.state.textarea,
+        postStatus: true,
+      }),
+    }).then(res => res.json()).then((res) => {
+      if (res.post) {
+        this.props.handlePost(res);
+      }
+      this.setState({
+        keyword: true,
+        log: res.message,
+      });
+    });
+  }
+
   render() {
     return (
       <section className="comment">
         <div className="wrapper-comment">
-          <form className="form-comment">
-            <p className="comment-name">You are logged as Krystian</p>
+          <form className="form-comment" onSubmit={this.fetchMessage}>
+            <p className="comment-name">You are logged as {this.props.user.name}</p>
             <label htmlFor="label-message" className="label-message">
-              <textarea id="label-message" className="comment-message" placeholder="Your message" />
+              <p className="validate-msg">{this.state.log}</p>
+              <textarea id="label-message" onChange={this.onChangeMessage} className="comment-message" placeholder="Your message" />
             </label>
-            <button type="submit" className="btn btn--message"><span className="btn-name">Send</span></button>
+            <CommentButton />
           </form>
         </div>
       </section>

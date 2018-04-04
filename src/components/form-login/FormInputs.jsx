@@ -16,7 +16,7 @@ const FormInputs = (props) => {
       </label>
       <label htmlFor="password" className="label-password label">
         Password
-        <input id="password" onChange={props.onChangePassword} className="label-password__input input" type="text" placeholder="Password" />
+        <input id="password" onChange={props.onChangePassword} className="label-password__input input" type="password" placeholder="Password" />
         <p className="validate-msg">{validate && validate.password || validate && validate.fields ? validate.message : ''}</p>
       </label>
     </React.Fragment>

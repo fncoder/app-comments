@@ -63,7 +63,6 @@ router.post('/', (req, res) =>{
     }
 
   }
-  console.log(users);
 })
 
 module.exports = router;

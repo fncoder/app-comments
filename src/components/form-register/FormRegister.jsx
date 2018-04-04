@@ -112,12 +112,13 @@ class FormRegister extends React.Component {
     });
   }
 
+
   render() {
     return (
       <React.Fragment>
         <section className="form">
           <div className="wrapper-form">
-            <form className="form-submit" onSubmit={this.handleSubmit}>
+            <form className="form-submit" ref="form" onSubmit={this.handleSubmit}>
               <p className="form-text">Sign Up</p>
               <FormInputs
                 logs={this.state.logs}
