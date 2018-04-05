@@ -89,20 +89,22 @@ class FormLogin extends React.Component {
 
   render() {
     return (
-      <section className="form">
-        <div className="wrapper-form">
-          <form className="form-submit" onSubmit={this.handleNext}>
-            <p className="form-text">Sign In</p>
-            <FormInputs
-              logs={this.state.logs}
-              onChangeName={this.onChangeName}
-              onChangePassword={this.onChangePassword}
-            />
-            <p className="text-account">You don't have an account yet? <a className="text-click" onClick={this.props.handleRegister} href="#">Click here</a></p>
-            <FormButtons />
-          </form>
-        </div>
-      </section>
+      <React.Fragment>
+        <section className="form">
+          <div className="wrapper-form">
+            <form className="form-submit" onSubmit={this.handleNext}>
+              <p className="form-text">Sign In</p>
+              <FormInputs
+                logs={this.state.logs}
+                onChangeName={this.onChangeName}
+                onChangePassword={this.onChangePassword}
+              />
+              <p className="text-account">You don't have an account yet? <a className="text-click" onClick={this.props.handleRegister} href="#">Click here</a></p>
+              <FormButtons />
+            </form>
+          </div>
+        </section>
+      </React.Fragment>
     );
   }
 }

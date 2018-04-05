@@ -54,6 +54,11 @@ class App extends React.Component {
     });
   }
 
+  handleSplashscreen(value) {
+    this.setState({
+      splashscreen: value,
+    });
+  }
   componentDidMount() {
     const url = 'http://localhost:3001/getpost';
     fetch(url)

@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const register = require('./routes/register.js');
 const login = require('./routes/login.js')
 const post = require('./routes/post.js');
-
-
 const staticFiles = __dirname + './../dist';
 
 app.use(express.static(staticFiles));

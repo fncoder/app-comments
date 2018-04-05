@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import CommentButton from './CommentButton.jsx';
 
 class Comment extends React.Component {
@@ -60,12 +59,18 @@ class Comment extends React.Component {
       }),
     }).then(res => res.json()).then((res) => {
       if (res.post) {
+        this.setState({
+          textarea: '',
+          keyword: false,
+          log: res.message,
+        });
         this.props.handlePost(res);
+      } else {
+        this.setState({
+          keyword: true,
+          log: res.message,
+        });
       }
-      this.setState({
-        keyword: true,
-        log: res.message,
-      });
     });
   }
 
@@ -77,7 +82,7 @@ class Comment extends React.Component {
             <p className="comment-name">You are logged as {this.props.user.name}</p>
             <label htmlFor="label-message" className="label-message">
               <p className="validate-msg">{this.state.log}</p>
-              <textarea id="label-message" onChange={this.onChangeMessage} className="comment-message" placeholder="Your message" />
+              <textarea id="label-message" onChange={this.onChangeMessage} value={this.state.textarea} className="comment-message" placeholder="Your message" />
             </label>
             <CommentButton />
           </form>

@@ -11,7 +11,6 @@ class FormRegister extends React.Component {
       name: '',
       password: '',
       repeatPassword: '',
-      message: undefined,
       logs: [],
       status: false,
       keyword: false,
@@ -91,6 +90,9 @@ class FormRegister extends React.Component {
     }).then(res => res.json()).then((res) => {
       if (res.status === 'register') {
         this.setState({
+          name: '',
+          password: '',
+          repeatPassword: '',
           status: true,
           keyword: false,
         }, () => {
@@ -105,7 +107,6 @@ class FormRegister extends React.Component {
       } else {
         this.setState({
           logs: [...this.state.logs, res],
-          status: false,
           keyword: true,
         });
       }
@@ -118,9 +119,10 @@ class FormRegister extends React.Component {
       <React.Fragment>
         <section className="form">
           <div className="wrapper-form">
-            <form className="form-submit" ref="form" onSubmit={this.handleSubmit}>
+            <form className="form-submit" onSubmit={this.handleSubmit}>
               <p className="form-text">Sign Up</p>
               <FormInputs
+                value={this.state}
                 logs={this.state.logs}
                 onChangeName={this.onChangeName}
                 onChangePassword={this.onChangePassword}
