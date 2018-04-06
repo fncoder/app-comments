@@ -60,7 +60,7 @@ class App extends React.Component {
     });
   }
   componentDidMount() {
-    const url = 'http://localhost:3001/getpost';
+    const url = '/getpost';
     fetch(url)
       .then(res => res.json()).then((res) => {
         if (res.length > 0) {
