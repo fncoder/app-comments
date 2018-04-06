@@ -26,7 +26,7 @@ class FormLogin extends React.Component {
   }
 
   onChangeFetch() {
-    const url = 'http://localhost:3001/login';
+    const url = 'https://register-login-system.herokuapp.com/login';
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ class FormLogin extends React.Component {
 
   handleNext(e) {
     e.preventDefault();
-    const url = 'http://localhost:3001/login';
+    const url = 'https://register-login-system.herokuapp.com/login';
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',

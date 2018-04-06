@@ -60,7 +60,7 @@ class FormRegister extends React.Component {
   }
 
   onChangeFetch() {
-    const url = 'http://localhost:3001/register';
+    const url = 'https://register-login-system.herokuapp.com/register';
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ class FormRegister extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const url = 'http://localhost:3001/register';
+    const url = 'https://register-login-system.herokuapp.com/register';
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',
