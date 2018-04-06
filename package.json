@@ -4,7 +4,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "watch": "webpack-dev-server --watch",
-    "server": "node ./src/server.js"
+    "server": "node ./src/server.js",
+    "start": "node ./src/server.js"
   },
   "author": "Krystian Witkowski",
   "license": "MIT",
