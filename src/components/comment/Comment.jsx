@@ -33,7 +33,7 @@ class Comment extends React.Component {
   }
 
   onChangeFetch() {
-    const url = 'http://localhost:3001/post';
+    const url = '/post';
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ class Comment extends React.Component {
 
   fetchMessage(e) {
     e.preventDefault();
-    const url = 'http://localhost:3001/post';
+    const url = '/post';
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',
