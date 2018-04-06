@@ -19,7 +19,7 @@ class SuccessRegister extends React.Component {
 
   render() {
     return (
-      <div className={`message ${this.state.hidden ? this.state.hidden : ''}`}>
+      <div className={`message ${this.state.hidden ? this.state.hidden : null}`}>
         <p className="message__text">Your account has been registered successfully.</p>
       </div>
     );

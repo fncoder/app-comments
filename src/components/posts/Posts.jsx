@@ -1,4 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 const Posts = (props) => {
   const items = props.posts.map((value, index) => (
@@ -16,5 +21,7 @@ const Posts = (props) => {
     </section>
   );
 };
+
+Posts.propTypes = propTypes;
 
 export default Posts;

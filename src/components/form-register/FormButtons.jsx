@@ -1,4 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+};
 
 const FormButtons = props => (
   <div className="form-buttons">
@@ -7,5 +12,6 @@ const FormButtons = props => (
   </div>
 );
 
+FormButtons.propTypes = propTypes;
 
 export default FormButtons;

@@ -1,6 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FormButtons from './FormButtons.jsx';
 import FormInputs from './FormInputs.jsx';
+
+const propTypes = {
+  users: PropTypes.string.isRequired,
+  handleComment: PropTypes.func.isRequired,
+  handleRegister: PropTypes.func.isRequired,
+};
 
 class FormLogin extends React.Component {
   constructor(props) {
@@ -16,37 +23,6 @@ class FormLogin extends React.Component {
     this.handleNext = this.handleNext.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-  }
-
-  handleNext(e) {
-    e.preventDefault();
-    const url = 'http://localhost:3001/login';
-    fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        name: this.state.name,
-        password: this.state.password,
-        users: this.props.users,
-        loginStatus: true,
-      }),
-    }).then(res => res.json()).then((res) => {
-      if (res.status === 'login') {
-        this.setState({
-          login: res,
-          keyword: false,
-        }, () => {
-          this.props.handleComment(this.state.login);
-        });
-      } else {
-        this.setState({
-          logs: [...this.state.logs, res],
-          keyword: true,
-        });
-      }
-    });
   }
 
   onChangeFetch() {
@@ -87,6 +63,36 @@ class FormLogin extends React.Component {
     });
   }
 
+  handleNext(e) {
+    e.preventDefault();
+    const url = 'http://localhost:3001/login';
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        name: this.state.name,
+        password: this.state.password,
+        users: this.props.users,
+        loginStatus: true,
+      }),
+    }).then(res => res.json()).then((res) => {
+      if (res.status === 'login') {
+        this.setState({
+          login: res,
+          keyword: false,
+        }, () => {
+          this.props.handleComment(this.state.login);
+        });
+      } else {
+        this.setState({
+          logs: [...this.state.logs, res],
+          keyword: true,
+        });
+      }
+    });
+  }
   render() {
     return (
       <React.Fragment>
@@ -99,7 +105,7 @@ class FormLogin extends React.Component {
                 onChangeName={this.onChangeName}
                 onChangePassword={this.onChangePassword}
               />
-              <p className="text-account">You don't have an account yet? <a className="text-click" onClick={this.props.handleRegister} href="#">Click here</a></p>
+              <p className="text-account">You don't have an account yet? <a href="#" className="text-click" onClick={this.props.handleRegister}>Click here</a></p>
               <FormButtons />
             </form>
           </div>
@@ -109,5 +115,6 @@ class FormLogin extends React.Component {
   }
 }
 
+FormLogin.propTypes = propTypes;
 
 export default FormLogin;

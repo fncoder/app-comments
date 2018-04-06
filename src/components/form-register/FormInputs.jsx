@@ -1,4 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  logs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onChangeName: PropTypes.func.isRequired,
+  onChangePassword: PropTypes.func.isRequired,
+  onChangeRepeat: PropTypes.func.isRequired,
+  value: PropTypes.object.isRequired,
+};
 
 const FormInputs = (props) => {
   let validate = null;
@@ -27,5 +36,6 @@ const FormInputs = (props) => {
   );
 };
 
+FormInputs.propTypes = propTypes;
 
 export default FormInputs;

@@ -1,5 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CommentButton from './CommentButton.jsx';
+
+const propTypes = {
+  user: PropTypes.string.isRequired,
+  handlePost: PropTypes.func.isRequired,
+};
 
 class Comment extends React.Component {
   constructor(props) {
@@ -91,5 +97,7 @@ class Comment extends React.Component {
     );
   }
 }
+
+Comment.propTypes = propTypes;
 
 export default Comment;

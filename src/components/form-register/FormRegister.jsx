@@ -1,7 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FormButtons from './FormButtons.jsx';
 import FormInputs from './FormInputs.jsx';
 import SuccessRegister from '../success/SuccessRegister.jsx';
+
+const propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+};
 
 class FormRegister extends React.Component {
   constructor(props) {
@@ -112,8 +117,6 @@ class FormRegister extends React.Component {
       }
     });
   }
-
-
   render() {
     return (
       <React.Fragment>
@@ -138,5 +141,6 @@ class FormRegister extends React.Component {
   }
 }
 
+FormRegister.propTypes = propTypes;
 
 export default FormRegister;
